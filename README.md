@@ -5,6 +5,7 @@ an automation test framework for functional tests
 ## How to build
 
 ant compile
+
 ant dist
 
 ## How to run tests for modules
