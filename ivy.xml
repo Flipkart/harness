@@ -1,5 +1,5 @@
 <ivy-module version="2.0">
-	<info organisation="org.apache" module="w3-agent"/>
+	<info organisation="com.flipkart" module="harness"/>
 	<dependencies>
 
     </dependencies>
