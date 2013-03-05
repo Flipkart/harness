@@ -4,25 +4,25 @@ an automation test framework for functional tests
 
 ## How to build
 
-ant compile
+$ant compile
 
-ant dist
+$ant dist
 
 ## How to run tests for modules
 
-ant -Dmodule=website test
+$ant -Dmodule=website test
 
 ## How to run tests for features
 
-ant -Dmodule=website -Dfeature=discovery test
+$ant -Dmodule=website -Dfeature=discovery test
 
 ## How to run tests for subfeatures
 
-ant -Dmodule=website -Dfeature=discovery -Dsubfeature=landing test
+$ant -Dmodule=website -Dfeature=discovery -Dsubfeature=landing test
 
 ## How to enable database persistence
 
-ant -Dmodule=website -Dpersist=true test
+$ant -Dmodule=website -Dpersist=true test
 
 
 You require the following to build Harness:
