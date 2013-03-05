@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="LandingPageSuite" duration-ms="3015" started-at="2013-03-05T13:24:53Z" finished-at="2013-03-05T13:24:56Z">
+    <groups>
+    </groups>
+    <test name="LandingPage" duration-ms="3015" started-at="2013-03-05T13:24:53Z" finished-at="2013-03-05T13:24:56Z">
+      <class name="tests.website.discovery.landing.src.LandingPageTests">
+        <test-method status="PASS" signature="setup()[pri:0, instance:tests.website.discovery.landing.src.LandingPageTests@6b5635fa]" name="setup" is-config="true" duration-ms="7794" started-at="2013-03-05T18:54:45Z" finished-at="2013-03-05T18:54:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method status="PASS" signature="verifyClothes()[pri:0, instance:tests.website.discovery.landing.src.LandingPageTests@6b5635fa]" name="verifyClothes" duration-ms="3004" started-at="2013-03-05T18:54:53Z" finished-at="2013-03-05T18:54:56Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- verifyClothes -->
+        <test-method status="PASS" signature="teardown()[pri:0, instance:tests.website.discovery.landing.src.LandingPageTests@6b5635fa]" name="teardown" is-config="true" duration-ms="22" started-at="2013-03-05T18:54:56Z" finished-at="2013-03-05T18:54:56Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- teardown -->
+      </class> <!-- tests.website.discovery.landing.src.LandingPageTests -->
+    </test> <!-- LandingPage -->
+  </suite> <!-- LandingPageSuite -->
+  <suite name="Default Suite" duration-ms="0" started-at="2013-03-05T13:24:56Z" finished-at="2013-03-05T13:24:56Z">
+    <groups>
+    </groups>
+  </suite> <!-- Default Suite -->
+</testng-results>

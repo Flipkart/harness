@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<project name="Harness" basedir="." default="help" xmlns:ivy="antlib:org.apache.ivy.ant">
+    <property name="module" value=""/>
+    <property name="feature" value=""/>
+    <property name="subfeature" value=""/>
+    <property name="persist" value=""/>
+    <property name="src.dir" value="${basedir}/src"/>
+    <property name="tests.dir" value="${basedir}/tests"/>
+    <property name="output.dir" value="${basedir}/output"/>
+    <property name="conf.dir" value="${basedir}/conf"/>
+    <property name="build.dir" value="${basedir}/bin"/>
+    <property name="dist.dir" value="${basedir}/dist"/>
+    <property name="tests-build.dir" value="${tests.dir}/bin"/>
+    <property name="tests-dist.dir" value="${basedir}/dist"/>
+    <property name="lib.dir" value="${basedir}/lib"/>
+    <property name="debug" value="true"/>
+    <property name="version" value="1.0.0"/>
+    <property name="framework-jar.name" value="harness-${version}.jar"/>
+    <property name="tests-jar.name" value="tests-${version}.jar"/>
+    <mkdir dir="${build.dir}"/>
+    <mkdir dir="${dist.dir}"/>
+    <mkdir dir="${tests-build.dir}"/>
+    <mkdir dir="${output.dir}"/>
+
+
+
+
+    <path id="classpath">
+        <fileset dir="${lib.dir}" includes="**/*.jar"/>
+    </path>
+
+    <target name="help">
+
+        <echo message="Usage: ant -Dmodule=[website] -Dfeature=[discovery] -Dsubfeature=[search] -Dpersist=[true|false] [compile|dist|test|clean]"/>
+
+    </target>
+
+    <target name="compile">
+        <mkdir dir="${build.dir}"/>
+
+        <javac srcdir="${src.dir}" debug="${debug}" destdir="${build.dir}" includeantruntime="false">
+            <classpath>
+                <fileset dir="${lib.dir}" includes="**/*.jar"/>
+                <pathelement  path="${build.dir}"/>
+                <pathelement  path="${tests-build.dir}"/>
+            </classpath>
+        </javac>
+
+        <javac srcdir="${tests.dir}" debug="${debug}" destdir="${tests-build.dir}" includeantruntime="false">
+            <classpath>
+                <fileset dir="${lib.dir}" includes="**/*.jar"/>
+                <pathelement  path="${build.dir}"/>
+                <pathelement  path="${tests-build.dir}"/>
+            </classpath>
+        </javac>
+
+    </target>
+
+    <target name="prep-dist">
+        <mkdir dir="${dist.dir}"/>
+    </target>
+
+    <target name="dist" depends="prep-dist,compile">
+
+        <jar basedir="${build.dir}" destfile="${dist.dir}/${framework-jar.name}">
+            <fileset dir="${conf.dir}"/>
+            <manifest>
+                <attribute name="Main-Class" value="com.flipkart.website.testrunner.Driver" />
+            </manifest>
+        </jar>
+
+        <jar basedir="${tests-build.dir}" destfile="${tests-dist.dir}/${tests-jar.name}">
+        </jar>
+
+    </target>
+
+    <target name="test" depends="dist">
+        <java fork="true" classname="com.flipkart.harness.testrunner.Driver">
+            <classpath>
+                <path refid="classpath"/>
+                <path location="${dist.dir}/${framework-jar.name}"/>
+                <path location="${dist.dir}/${tests-jar.name}"/>
+
+            </classpath>
+            <jvmarg value="-Dmodule=${module}"/>
+            <jvmarg value="-Dfeature=${feature}"/>
+            <jvmarg value="-Dsubfeature=${subfeature}"/>
+            <jvmarg value="-Dpersist=${persist}"/>
+
+
+        </java>
+    </target>
+
+    <target name="clean">
+        <delete dir="${dist.dir}"/>
+        <delete dir="${build.dir}"/>
+        <delete dir="${tests-dist.dir}"/>
+        <delete dir="${tests-build.dir}"/>
+        <delete dir="${output.dir}"/>
+    </target>
+
+</project>

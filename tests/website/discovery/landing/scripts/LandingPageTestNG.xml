@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="LandingPageSuite" verbose="0">
+    <listeners>
+        <listener class-name="com.flipkart.harness.testng.TestListener" />
+    </listeners>
+
+    <test name="LandingPage"   >
+        <classes>
+            <class name="tests.website.discovery.landing.src.LandingPageTests" />
+        </classes>
+    </test>
+</suite>

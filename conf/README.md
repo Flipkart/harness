@@ -1,0 +1,1 @@
+This folder contains the configuration properties. The config parameters can be defined in the config.properties file.

@@ -1,0 +1,1 @@
+This folder contains the xpath, css selectors properties files.
