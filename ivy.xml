@@ -1,6 +1,11 @@
 <ivy-module version="2.0">
 	<info organisation="com.flipkart" module="harness"/>
 	<dependencies>
-
+        <dependency org="org.seleniumhq.selenium" name="selenium-server" rev="2.31.0"/>
+        <dependency org="org.seleniumhq.selenium" name="selenium-java" rev="2.31.0"/>
+        <dependency org="mysql" name="mysql-connector-java" rev="5.1.23"/>
+        <dependency org="org.slf4j" name="slf4j-api" rev="1.7.2"/>
+        <dependency org="org.slf4j" name="slf4j-simple" rev="1.7.2"/>
+        <dependency org="com.googlecode.json-simple" name="json-simple" rev="1.1"/>
     </dependencies>
     </ivy-module>

@@ -1,3 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ivy-settings>
+    <settings defaultResolver="main" />
+    <resolvers>
+        <chain name="main">
+            <ibiblio name="central" m2compatible="true"/>
+            <ibiblio name="lib-releases" m2compatible="true" root="http://repo1.maven.org/maven2/" />
+           </chain>
+    </resolvers>
 </ivy-settings>

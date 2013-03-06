@@ -35,7 +35,12 @@
 
     </target>
 
-    <target name="compile">
+    <target name="resolve" description="--> retreive dependencies with ivy">
+        <ivy:configure file="${basedir}/ivy-settings.xml"/>
+        <ivy:retrieve/>
+    </target>
+
+    <target name="compile" depends="resolve">
         <mkdir dir="${build.dir}"/>
 
         <javac srcdir="${src.dir}" debug="${debug}" destdir="${build.dir}" includeantruntime="false">
