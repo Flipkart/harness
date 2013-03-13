@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.util.ArrayList;
 
+
 public class FolderScanner {
 
     private static FolderScanner instance = null;
@@ -36,7 +37,6 @@ public class FolderScanner {
             String testHome = config.configProperties.getProperty("tests.home");
             String path = testHome + "/" + module;
 
-            //logger.info("path is "+path);
             String[] featureList = getSubFolderList(path);
 
             for (int i = 0; i < featureList.length; i++) {

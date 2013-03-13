@@ -1,8 +1,12 @@
 package com.flipkart.harness.testrunner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.UUID;
+import org.apache.jmeter.NewDriver;
 
 /**
  * Created by IntelliJ IDEA.
@@ -15,13 +19,14 @@ public class JmeterRunner implements HarnessRunner {
 
     Config config = new Config();
     String jmeter, testHome, testReport;
+    Logger logger = LoggerFactory.getLogger(JmeterRunner.class);
 
     public JmeterRunner() {
 
         config.loadConfigFile();
-        jmeter = config.configProperties.getProperty("jmeter.home") + "/bin/jmeter";
+        jmeter = config.configProperties.getProperty("jmeter.home");
         testHome = config.configProperties.getProperty("tests.home");
-        testReport = config.configProperties.getProperty("tests.report");
+        testReport = config.configProperties.getProperty("output");
 
     }
 
@@ -42,7 +47,7 @@ public class JmeterRunner implements HarnessRunner {
             }
 
         } else {
-            System.out.println("No .jmx files required for Jmeter tests were found.");
+            logger.info("No .jmx files were found.");
         }
         return testList;
     }
@@ -50,49 +55,24 @@ public class JmeterRunner implements HarnessRunner {
 
     public void execute(Test test, UUID batchId, Boolean persist) {
 
-
-
-        int right = 0, wrong = 0, exceptions = 0;
         try {
-            Process p = Runtime.getRuntime().exec(jmeter + " -n -t " + test.path + " -l " + testReport + "/" + batchId + "/Jmeter/" + test.name + ".csv");
-            p.waitFor();
 
-            String line;
+          logger.info("Test Filename "+test.getPath());
+          ArrayList<String> argsArrayList = new ArrayList<String>();
+          argsArrayList.add("-n");
 
-            BufferedReader error = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-            while ((line = error.readLine()) != null) {
-                System.out.println(line);
-            }
-            error.close();
-
-            BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            while ((line = input.readLine()) != null) {
-
-                System.out.println(line);
-            }
-
-            input.close();
-
-            OutputStream outputStream = p.getOutputStream();
-            PrintStream printStream = new PrintStream(outputStream);
-            printStream.println();
-            printStream.flush();
-            printStream.close();
-
-            test.setPassed(1);
-            test.setFailed(wrong);
-            test.setException(exceptions);
-
-        } catch (Exception e) {
-
-            test.setPassed(right);
-            test.setFailed(wrong);
-            test.setException(1);
+          argsArrayList.add("-t");
+          argsArrayList.add(test.getPath());
+          argsArrayList.add("-l");
+          argsArrayList.add("results.jtl");
+          System.setProperty("jmeter.home",jmeter);
+          String[] argsArray = argsArrayList.toArray(new String[argsArrayList.size()]);
+          NewDriver.main(argsArray);
 
 
-            e.printStackTrace();
-        } finally {
 
+        }catch (Exception ex){
+            ex.printStackTrace();
         }
 
     }

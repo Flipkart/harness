@@ -39,7 +39,7 @@ public class TestNgRunner implements HarnessRunner {
                     testList.add(tests[i]);
             }
         } else {
-            logger.info("No scripts folder required for TestNg tests were found.");
+            logger.info("No TestNG tests found ....");
         }
         return testList;
     }
