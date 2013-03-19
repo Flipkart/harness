@@ -49,7 +49,7 @@ public class TestNgRunner implements HarnessRunner {
 
         DbHelper db = new DbHelper();
         try {
-
+           String outputDir = testReport + "/" + batchId + "/" + "TestNG" + "/"+test.getName();
            TestListenerAdapter tla = new TestListenerAdapter();
            ArrayList<String> suiteFiles = new ArrayList<String>();
            suiteFiles.add(test.getPath());
@@ -58,7 +58,7 @@ public class TestNgRunner implements HarnessRunner {
            TestNG testNG = new TestNG();
            testNG.addListener(tla);
            testNG.setCommandLineSuite(xmlSuite);
-           testNG.setOutputDirectory(testReport + "/" + batchId + "/" + "TestNG");
+           testNG.setOutputDirectory(outputDir);
            testNG.run();
 
            List failed = tla.getFailedTests();
@@ -72,9 +72,7 @@ public class TestNgRunner implements HarnessRunner {
 
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
         }
-
 
     }
 

@@ -98,7 +98,77 @@ public class Test {
     public void setSubfeature(String subfeature) {
         this.subfeature = subfeature;
     }
+    public Integer getSamples() {
+        return samples;
+    }
 
+    public void setSamples(Integer samples) {
+        this.samples = samples;
+    }
+
+    public Integer getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(Integer success) {
+        this.success = success;
+    }
+
+    public Integer getFailure() {
+        return failure;
+    }
+
+    public void setFailure(Integer failure) {
+        this.failure = failure;
+    }
+
+    public Integer getMinResponseTime() {
+        return minResponseTime;
+    }
+
+    public void setMinResponseTime(Integer minResponseTime) {
+        this.minResponseTime = minResponseTime;
+    }
+
+    public Integer getMaxResponseTime() {
+        return maxResponseTime;
+    }
+
+    public void setMaxResponseTime(Integer maxResponseTime) {
+        this.maxResponseTime = maxResponseTime;
+    }
+
+    public Integer getAvgResponseTime() {
+        return avgResponseTime;
+    }
+
+    public void setAvgResponseTime(Integer avgResponseTime) {
+        this.avgResponseTime = avgResponseTime;
+    }
+
+    public Integer getMedian() {
+        return median;
+    }
+
+    public void setMedian(Integer median) {
+        this.median = median;
+    }
+
+    public Integer getNinetiethPercentile() {
+        return ninetiethPercentile;
+    }
+
+    public void setNinetiethPercentile(Integer ninetiethPercentile) {
+        this.ninetiethPercentile = ninetiethPercentile;
+    }
+
+    public long getThroughput() {
+        return throughput;
+    }
+
+    public void setThroughput(long throughput) {
+        this.throughput = throughput;
+    }
 
     String name;
     String path;
@@ -111,5 +181,15 @@ public class Test {
     String module;
     String feature;
     String subfeature;
+    Integer samples;
+    Integer success;
+    Integer failure;
+    Integer minResponseTime;
+    Integer maxResponseTime;
+    Integer avgResponseTime;
+    Integer median;
+    Integer ninetiethPercentile;
+    long throughput;
+
 
 }

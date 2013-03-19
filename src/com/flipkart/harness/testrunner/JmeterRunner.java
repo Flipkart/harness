@@ -1,10 +1,16 @@
 package com.flipkart.harness.testrunner;
 
+import com.flipkart.harness.jmeter.JmeterArgs;
+import com.flipkart.harness.jmeter.JmeterResultsParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.file.*;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import org.apache.jmeter.NewDriver;
 
@@ -27,6 +33,7 @@ public class JmeterRunner implements HarnessRunner {
         jmeter = config.configProperties.getProperty("jmeter.home");
         testHome = config.configProperties.getProperty("tests.home");
         testReport = config.configProperties.getProperty("output");
+        System.setProperty("jmeter.home",jmeter);
 
     }
 
@@ -55,21 +62,17 @@ public class JmeterRunner implements HarnessRunner {
 
     public void execute(Test test, UUID batchId, Boolean persist) {
 
+        DbHelper db = new DbHelper();
         try {
+          String testFile = test.getPath();
+          String reportFile = testReport + "/" + batchId + "/" + "Jmeter"+ "/" + test.getName() + "/" + test.getName() + ".jtl";
 
-          logger.info("Test Filename "+test.getPath());
-          ArrayList<String> argsArrayList = new ArrayList<String>();
-          argsArrayList.add("-n");
-
-          argsArrayList.add("-t");
-          argsArrayList.add(test.getPath());
-          argsArrayList.add("-l");
-          argsArrayList.add("results.jtl");
-          System.setProperty("jmeter.home",jmeter);
-          String[] argsArray = argsArrayList.toArray(new String[argsArrayList.size()]);
-          NewDriver.main(argsArray);
+          NewDriver.main(JmeterArgs.buildArgsArray(testFile,reportFile));
+          waitForTestComplete();
+          test = JmeterResultsParser.parse(test,reportFile);
 
 
+          db.addPerfResults(test, batchId, persist);
 
         }catch (Exception ex){
             ex.printStackTrace();
@@ -77,5 +80,20 @@ public class JmeterRunner implements HarnessRunner {
 
     }
 
+    public static void waitForTestComplete(){
+        Thread waitThread = null;
+        Set<Thread> threadSet = Thread.getAllStackTraces().keySet();
+        for (Thread thread : threadSet) {
+            if ("StandardJMeterEngine".equals(thread.getName())) {
+                waitThread = thread;
+                break;
+            }
 
+        }
+        if (waitThread != null) {
+            try{
+            waitThread.join();
+            }catch (Exception ex){ex.printStackTrace();}
+        }
+    }
 }

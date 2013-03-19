@@ -68,7 +68,7 @@ public class Common {
         browser = configProperties.getProperty("selenium.browser");
 
         if(hostname==null && port==null && browser==null){
-
+            logger.info("I am in setup !!! ");
             driver = new FirefoxDriver();
 
         }else{
