@@ -2,6 +2,8 @@
 
 an automation test framework for functional tests
 
+* More info  [wiki](https://github.com/Flipkart/harness/wiki)
+
 ## How to build
 
 $ant -lib lib compile
