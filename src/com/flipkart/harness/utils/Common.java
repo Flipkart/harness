@@ -16,6 +16,7 @@ import java.util.Random;
 import com.flipkart.harness.testng.ElementNotFoundException;
 import com.flipkart.harness.testng.Locator;
 import com.flipkart.harness.testrunner.Config;
+import com.flipkart.harness.testrunner.DriverAdapter;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -27,75 +28,18 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class Common {
+public class Common extends DriverAdapter {
 
     public static Logger logger = Logger.getLogger(Common.class.getName());
-    public static WebDriver driver;
-    static Properties configProperties = new Properties();
     public static Properties props = new Properties();
     public static String ProjectPath;
     public static String LocatorsPath;
-    public static String env;
+
     public static FileInputStream fis;
     public Map<String, Locator> locators;
 
-    public String hostname = null, port = null, browser = null;
+
     protected Config config = new Config();
-
-
-    public static boolean loadConfigFile() {
-        env = System.getenv("ENV");
-
-        if (env == null) {
-            env = "local";
-        }
-
-        try {
-            configProperties.load(new FileReader("conf/config.properties"));
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return true;
-    }
-
-    public void setup() {
-
-        hostname = configProperties.getProperty("selenium.hostname");
-        port = configProperties.getProperty("selenium.port");
-        browser = configProperties.getProperty("selenium.browser");
-
-        if(hostname==null && port==null && browser==null){
-            logger.info("I am in setup !!! ");
-            driver = new FirefoxDriver();
-
-        }else{
-
-            try{
-            if ( browser.startsWith("IE"))
-                driver = new RemoteWebDriver(new URL("http://" + hostname + ":" + port + "/wd/hub"), DesiredCapabilities.internetExplorer());
-            else if ( browser.startsWith("FF"))
-                driver = new RemoteWebDriver(new URL("http://" + hostname + ":" + port + "/wd/hub"), DesiredCapabilities.firefox());
-            else if (browser.startsWith("GoogleChrome"))
-                driver = new RemoteWebDriver(new URL("http://" + hostname + ":" + port + "/wd/hub"), DesiredCapabilities.chrome());
-            else
-                logger.info("Bad browser name: " + browser + ". Unable to launch");
-
-            }catch (MalformedURLException ex){
-                ex.printStackTrace();
-            }
-            }
-
-        }
-
-
-
-
-    public void teardown() {
-        driver.close();
-    }
 
     public By getBy(String locator) {
         By by;

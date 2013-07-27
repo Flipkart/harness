@@ -25,10 +25,10 @@ public class JmeterResultsParser {
 
     static Logger logger = LoggerFactory.getLogger("Jmeter");
 
-    static ArrayList<Integer> elapsedTime = new ArrayList<>();
+    static ArrayList<Integer> elapsedTime = new ArrayList<Integer>();
     static Integer samples = 0;
-    static ArrayList<Integer> latency = new ArrayList<>();
-    static ArrayList<Long> timeStamp = new ArrayList<>();
+    static ArrayList<Integer> latency = new ArrayList<Integer>();
+    static ArrayList<Long> timeStamp = new ArrayList<Long>();
     static Integer success = 0;
     static Integer failure = 0;
     static Integer minResponseTime,maxResponseTime,avgResponseTime,median,ninetiethPercentile;

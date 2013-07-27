@@ -1,5 +1,9 @@
 <?xml version="1.0"?>
 <project name="Harness" basedir="." default="help" xmlns:ivy="antlib:org.apache.ivy.ant">
+    <path id="ivy.lib.path">
+        <fileset dir="lib" includes="*.jar"/>
+    </path>
+    <taskdef resource="org/apache/ivy/ant/antlib.xml" uri="antlib:org.apache.ivy.ant" classpathref="ivy.lib.path"/>
     <property name="module" value=""/>
     <property name="feature" value=""/>
     <property name="subfeature" value=""/>
@@ -66,7 +70,7 @@
     </target>
 
     <target name="dist" depends="prep-dist,compile">
-
+        <get dest="lib/ivy.jar" src="http://search.maven.org/remotecontent?filepath=org/apache/ivy/ivy/2.2.0/ivy-2.2.0.jar"/>
         <jar basedir="${build.dir}" destfile="${dist.dir}/${framework-jar.name}">
             <fileset dir="${conf.dir}"/>
             <manifest>

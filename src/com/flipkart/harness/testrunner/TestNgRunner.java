@@ -1,9 +1,12 @@
 package com.flipkart.harness.testrunner;
 
+import com.flipkart.harness.testng.TestListener;
+import com.flipkart.harness.testng.TestReporter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.TestListenerAdapter;
 import org.testng.TestNG;
+import org.testng.collections.Lists;
 import org.testng.xml.XmlSuite;
 
 import java.io.*;
@@ -49,27 +52,26 @@ public class TestNgRunner implements HarnessRunner {
 
         DbHelper db = new DbHelper();
         try {
-           String outputDir = testReport + "/" + batchId + "/" + "TestNG" + "/"+test.getName();
-           TestListenerAdapter tla = new TestListenerAdapter();
-           ArrayList<String> suiteFiles = new ArrayList<String>();
-           suiteFiles.add(test.getPath());
-           XmlSuite xmlSuite = new XmlSuite();
-           xmlSuite.setSuiteFiles(suiteFiles);
-           TestNG testNG = new TestNG();
-           testNG.addListener(tla);
-           testNG.setCommandLineSuite(xmlSuite);
-           testNG.setOutputDirectory(outputDir);
-           testNG.run();
-
-           List failed = tla.getFailedTests();
-           List passed = tla.getPassedTests();
-           List ex = tla.getSkippedTests();
-           test.setPassed(passed.size());
-           test.setFailed(failed.size());
-           test.setException(ex.size());
-           db.addResults(test, batchId, persist);
-
-
+            String outputDir = testReport + "/" + batchId + "/" + "TestNG" + "/"+test.getName();
+            System.setProperty("testReport", outputDir);
+            TestListener tla = new TestListener();
+            TestReporter reporter = new TestReporter();
+            ArrayList<String> suiteFiles = new ArrayList<String>();
+            suiteFiles.add(test.getPath());
+            XmlSuite xmlSuite = new XmlSuite();
+            xmlSuite.setSuiteFiles(suiteFiles);
+            List suites = Lists.newArrayList();
+            suites.add(test.getPath());
+            TestNG testNG = new TestNG();
+            testNG.addListener(tla);
+            testNG.addListener(reporter);
+            testNG.setTestSuites(suites);
+            testNG.setOutputDirectory(outputDir);
+            testNG.run();
+            test.setPassed(tla.getPassedTests().size());
+            test.setFailed(tla.getFailedTests().size());
+            test.setException(tla.getSkippedTests().size());
+            db.addResults(test, batchId, persist);
         } catch (Exception e) {
             e.printStackTrace();
         }
