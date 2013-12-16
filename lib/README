@@ -1,0 +1,7 @@
+This is the lib dir for downloading the ivy depencencies.
+
+Before running the ant -lib lib dist command ensure that you latest ivy jar in your lib folder.The ivy jar can be
+downloaded from the following url.
+
+http://ant.apache.org/ivy/download.cgi
+
