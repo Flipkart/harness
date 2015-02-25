@@ -20,23 +20,19 @@ public class TestNgRunner implements HarnessRunner {
     String testHome, testReport;
     Logger logger = LoggerFactory.getLogger(TestNgRunner.class);
     public TestNgRunner() {
-
         config.loadConfigFile();
         testHome = config.configProperties.getProperty("tests.home");
         testReport = config.configProperties.getProperty("output");
-
     }
 
     ArrayList<String> testList = new ArrayList<String>();
 
     public ArrayList<String> initialize(String module, String feature, String subfeature) {
-
         String testHome = config.configProperties.getProperty("tests.home");
         String path = testHome + "/" + module + "/" + feature + "/" + subfeature;
         File testDir = new File(path+"/scripts");
         if (testDir.list() != null) {
             String[] tests = testDir.list();
-
             for (int i = 0; i < tests.length; i++) {
                 if (tests[i].contains(".xml"))
                     testList.add(tests[i]);

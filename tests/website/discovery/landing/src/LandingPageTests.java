@@ -11,20 +11,11 @@ import java.lang.Thread;
 
 import static com.flipkart.harness.testng.Assertion.*;
 
-public class LandingPageTests extends BaseTest
-{
+public class LandingPageTests extends BaseTest {
     Logger logger = LoggerFactory.getLogger(LandingPageTests.class);
 
     @Test
-    public void verifyClothes() throws Exception
-    {
-
+    public void verifyClothes() throws Exception {
         assertTrue(true, "Dummy Test passed");
-
-
     }
-
-
-
-
 }

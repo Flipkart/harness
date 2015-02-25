@@ -137,9 +137,7 @@ public class JmeterResultsParser {
         Integer totalTime=0;
         for(Integer i : elapsedTime) {
             totalTime = totalTime+i;
-
         }
-
         avgResponseTime = totalTime/samples;
         return avgResponseTime;
     }
@@ -149,11 +147,9 @@ public class JmeterResultsParser {
     }
 
     public static Integer getNinetiethPercentile(Integer samples,ArrayList<Integer> elapsedTime){
-
         double val = Math.floor(samples*.9);
         int ninetiethPercentileIndex = (int) val;
         return elapsedTime.get(ninetiethPercentileIndex-1);
-
     }
 
     public static long getThroughput(Integer samples,ArrayList<Long> timeStamp){

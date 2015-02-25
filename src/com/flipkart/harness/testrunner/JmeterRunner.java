@@ -40,7 +40,6 @@ public class JmeterRunner implements HarnessRunner {
     ArrayList<String> testList = new ArrayList<String>();
 
     public ArrayList<String> initialize(String module, String feature, String subfeature) {
-
         String testHome = config.configProperties.getProperty("tests.home");
         String path = testHome + "/" + module + "/" + feature + "/" + subfeature;
         File testDir = new File(path);

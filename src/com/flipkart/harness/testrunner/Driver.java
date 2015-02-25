@@ -39,7 +39,6 @@ public class Driver {
     }
 
     static void createTestBucket(ArrayList<Test> tests) {
-
         for (Test t : tests) {
              if (t.type.equals("TestNg")) {
                 testNgBucket.add(t);
@@ -65,7 +64,6 @@ public class Driver {
                 @Override
                 public void run() {
                     try {
-
                         for (Test t : tList) {
                             hr.execute(t, batchId, persist);
                         }

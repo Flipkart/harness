@@ -9,13 +9,11 @@ import java.util.List;
 import java.util.Random;
 
 
-public class BaseTest
-{
-
+public class BaseTest {
     Common common;
+
     @BeforeSuite
-    public void setup() throws Exception
-    {
+    public void setup() throws Exception {
         common = new Common();
         common.setup();
     }
@@ -25,8 +23,6 @@ public class BaseTest
     {
         common.teardown();
     }
-
-
 
     protected int getRandomNumberBetween(int min, int max)
     {

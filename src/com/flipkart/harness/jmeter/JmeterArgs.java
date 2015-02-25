@@ -27,8 +27,4 @@ public class JmeterArgs {
         String[] argsArray = argsArrayList.toArray(new String[argsArrayList.size()]);
         return argsArray;
     }
-
-
-
-
 }

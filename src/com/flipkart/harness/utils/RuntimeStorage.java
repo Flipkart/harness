@@ -3,8 +3,7 @@ package com.flipkart.harness.utils;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RuntimeStorage
-{
+public class RuntimeStorage {
     private static Map<String, String> runtimeStorageMap = new HashMap<String, String>();
 
     public static String get(String key)
