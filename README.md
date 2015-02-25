@@ -5,6 +5,7 @@ an automation test framework for functional tests
 * More info  [wiki](https://github.com/Flipkart/harness/wiki)
 
 ## How to build
+Before running below commands download ivy jar from here http://ant.apache.org/ivy/download.cgi and copy it into ant lib directory
 
 $ant -lib lib compile
 
